@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+const axios_1 = require("axios");
 const vscode = require("vscode");
 // this method is called when your extension is activated 
 // your extension is activated the very first time the command is executed
@@ -23,8 +24,10 @@ function activate(context) {
         const selection = editor.selection;
         let code = document.getText(selection);
         code = code.split(/[\s]+/).join(' ').toLowerCase();
-        // Display a message box to the user
-        vscode.window.showInformationMessage('code');
+        axios_1.default.post(" ", { code: code }, { headers: { "Content-Type": "application/json" } }).then(function (response) {
+            // Display a message box to the user
+            vscode.window.showInformationMessage(response.data);
+        });
     });
     context.subscriptions.push(disposable);
 }
