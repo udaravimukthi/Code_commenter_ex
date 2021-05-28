@@ -1,4 +1,4 @@
-// The module 'vscode' contains the VS Code extensibility API
+ // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
@@ -15,9 +15,21 @@ export function activate(context: vscode.ExtensionContext) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('code-commenter.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
+        
+		const editor = vscode.window.activeTextEditor;
+		if (!editor){
+			return; //the user doesn't have the text editor open
+		}
+
+		const document = editor.document;
+		const selection = editor.selection;
+
+		let code = document.getText(selection)
+		code = code.split(/[\s]+/).join(' ').toLowerCase();
+	
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from code-commenter!');
+		vscode.window.showInformationMessage('code');
 	});
 
 	context.subscriptions.push(disposable);
