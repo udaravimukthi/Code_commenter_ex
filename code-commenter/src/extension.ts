@@ -30,6 +30,11 @@ export function activate(context: vscode.ExtensionContext) {
 	    
 		axios.post(" ", {code: code}, {headers: {"Content-Type": "application/json"}}).then(function(response){
             // Display a message box to the user
+			if (editor) {
+				editor.edit(editBuilder => {
+					editBuilder.insert(selection.start, "//" + response.data + "\n")
+				})
+			}
 			vscode.window.showInformationMessage(response.data);
 		})
 	});
