@@ -24,7 +24,7 @@ function activate(context) {
         const selection = editor.selection;
         let code = document.getText(selection);
         code = code.split(/[\s]+/).join(' ').toLowerCase();
-        axios_1.default.post(" ", { code: code }, { headers: { "Content-Type": "application/json" } }).then(function (response) {
+        axios_1.default.post("http://f2d605073198.ngrok.io", { code: code }, { headers: { "Content-Type": "application/json" } }).then(function (response) {
             // Display a message box to the user
             if (editor) {
                 editor.edit(editBuilder => {
