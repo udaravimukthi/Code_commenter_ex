@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let code = document.getText(selection)
 		code = code.split(/[\s]+/).join(' ').toLowerCase();
 	    
-		axios.post(" ", {code: code}, {headers: {"Content-Type": "application/json"}}).then(function(response){
+		axios.post("http://f2d605073198.ngrok.io", {code: code}, {headers: {"Content-Type": "application/json"}}).then(function(response){
             // Display a message box to the user
 			if (editor) {
 				editor.edit(editBuilder => {
